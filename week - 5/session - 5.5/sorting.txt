@@ -1,0 +1,14 @@
+@GetMapping("/sort/{field}")
+public List<Student> sortStudents(@PathVariable String field) {
+    return repo.findAll(org.springframework.data.domain.Sort.by(field));
+}
+
+@GetMapping("/page/{pageNo}/{pageSize}")
+public List<Student> getStudentsByPage(@PathVariable int pageNo,
+                                       @PathVariable int pageSize) {
+
+    org.springframework.data.domain.Pageable pageable =
+            org.springframework.data.domain.PageRequest.of(pageNo, pageSize);
+
+    return repo.findAll(pageable).getContent();
+}

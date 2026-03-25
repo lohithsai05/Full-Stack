@@ -1,0 +1,51 @@
+// StudentController.java
+
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.entity.Student;
+import com.example.demo.repository.StudentRepository;
+
+@RestController
+@RequestMapping("/students")
+public class StudentController {
+
+    @Autowired
+    StudentRepository repo;
+
+    // CREATE
+    @PostMapping
+    public Student addStudent(@RequestBody Student s) {
+        return repo.save(s);
+    }
+
+    // READ ALL
+    @GetMapping
+    public List<Student> getStudents() {
+        return repo.findAll();
+    }
+
+    // READ BY ID
+    @GetMapping("/{id}")
+    public Student getStudent(@PathVariable int id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public Student updateStudent(@PathVariable int id, @RequestBody Student s) {
+        s.setId(id);
+        return repo.save(s);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        repo.deleteById(id);
+        return "Student Deleted";
+    }
+}

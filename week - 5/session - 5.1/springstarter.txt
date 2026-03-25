@@ -1,0 +1,24 @@
+// StudentcrudApplication.java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class StudentcrudApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(StudentcrudApplication.class, args);
+	}
+
+}
+
+# application.properties
+
+spring.datasource.url=jdbc:mysql://localhost:3307/studentdb
+spring.datasource.username=root
+spring.datasource.password=
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
